@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> epilogos </title>
+    
+    <meta name="description" content="epilogos: analysis and visualization of multi-epigenome datasets" />
+    <meta name="keywords" content="epilogos chromatin state models epigenomics information theory" />
+<!--    <link rel="icon" href="http://spritely.net/images/favicon.ico" type="image/x-icon" /> -->
+<!--    <link rel="shortcut icon" href="http://spritely.net/images/favicon.ico" type="image/x-icon" /> -->
+
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="/styles/ie6.css" /><![endif]-->
+    <script src="lib/jquery/1.7.1/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="scripts/jquery-ui-1.7.2.spritely.custom.min.js" type="text/javascript"></script>
+    <script src="scripts/jquery.spritely.js"></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://epigenomegateway.wustl.edu/browser/style.css" />
+    <script type="text/javascript" src="http://epigenomegateway.wustl.edu/browser/base.js"></script>
+    <script type="text/javascript" src="http://epigenomegateway.wustl.edu/browser/personality.js"></script>
+    <script type="text/javascript" src="http://epigenomegateway.wustl.edu/browser/embed.js"></script>
+ 
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-38497211-5', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+    <div id="container">
+
+      <div id="stage" class="stage">
+        <div id="epilogos" class="stage"></div>
+      </div>
+
+      <div id="epilogos_logo"></div>
+      <div id="playpause"></div>
+      <div id="slider"></div>
+      <div id="dragMe"></div>
+  
+      <div id="nav" class="screen">
+        <ul>
+          <li id="nav-home" class="active"><span><a href="#"></a></span></li>
+          <li id="nav-examples"><span><a href="#"></a></span></li>
+          <li id="nav-movies"><span><a href="#"></a></span></li>
+          <li id="nav-browser"><span><a href="#"></a></span></li>
+          <!--<li id="nav-method"><span><a href="#"></a></span></li>-->
+          <!--<li id="nav-applications"><span><a href="#"></a></span></li>-->
+        </ul>
+      </div>
+      
+      <div id="mainContent">
+  
+        <div class=content id=contentdiv>
+
+<p>
+<b><i>epilogos</i></b> for the Roadmap Epigenomics Project are browsable in the 
+<a href="http://epigenomegateway.wustl.edu/browser/?genome=hg19&amp;chrom=chr19&amp;datahub=http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.json&amp;coordinate=chr7:77100000-77600000" target="_blank">Epigenome Browser</a>
+developed at<br> Washington University in St. Louis.
+Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
+</p>
+
+<div style='margin:20px;display:inline-block;' id=panel_browse></div>
+  
+<script type='text/javascript'>
+  embed_washugb({
+      host:'http://epigenomegateway.wustl.edu',
+      container:document.getElementById('panel_browse'),
+      genome:'hg19',
+      noDefaultTrack:true,
+      noDeleteButton:true,
+      showFacet4customMetadata:true,
+      coordinate:'chr7:77100000-77600000',
+      foregroundColor:'#ffffff',
+      backgroundColor:'#000000',
+      showContent:[
+      {
+        type:'quantitativeCategorySeries',
+        name:'epilogos surprisal',
+        height:150,
+        url:'http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.gz',
+        backgroundcolor:'#000000',
+        mode:'show',
+        categories:{
+          '1':['Active TSS','#ff0000'],
+          '2':['Flanking Active TSS','#ff4500'],
+          '3':['Transcr at gene 5\' and 3\'','#32cd32'],
+          '4':['Strong transcription','#008000'],
+          '5':['Weak transcription','#006400'],
+          '6':['Genic enhancers','#c2e105'],
+          '7':['Enhancers','#ffff00'],
+          '8':['ZNF genes & repeats','#66cdaa'],
+          '9':['Heterochromatin','#8a91d0'],
+          '10':['Bivalent/Poised TSS','#cd5c5c'],
+          '11':['Flanking Bivalent TSS/Enh','#e9967a'],
+          '12':['Bivalent Enhancer','#bdb76b'],
+          '13':['Repressed PolyComb','#808080'],
+          '14':['Weak Repressed PolyComb','#c0c0c0'],
+          '15':['Quiescent/Low','#ffffff']
+        },
+      },
+      {
+        type:'native_track', 
+        list:[
+          {
+            name:'refGene',
+            mode:'full',
+            color:'#FFFFFF'
+          }
+        ]
+      },
+      ],
+  });
+</script>
+    
+  
+  
+ 
+
+
+        </div>
+  
+        <br><br>
+
+        <div class="content" id="idfooter">
+          <p>
+            These data are provided as-is, and a manuscript is in preparation.<br>
+            Please contact Wouter Meuleman (last name @ mit dot edu) for comments and suggestions. Thanks!
+          </p>
+        </div>
+              
+        <div class="clear"></div>
+
+      </div> <!-- end of mainContent -->
+  
+    </div> <!-- end of container -->
+  </body>
+</html>
+ 
