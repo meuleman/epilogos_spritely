@@ -46,7 +46,7 @@ pre {
 #container {
 	width: 100%;
 	/*min-width: 900px;*/
-	padding-top: 430px;  /* WOUTER */
+	padding-top: 340px;  /* WOUTER */
 	position: relative;
 }
 
@@ -79,7 +79,7 @@ pre {
 	left: 0;
 	width: 100%;
 	/*min-width: 900px;*/
-	height: 430px;
+	height: 340px;
 	overflow: hidden;
 }
 #stage {
@@ -93,7 +93,7 @@ pre {
 }
 #dragMe {
 	position: absolute;
-	top: 360px;
+	top: 275px;
 	left: 57%;
 	z-index: 150;
 	background: url(../images/dragme_text.png) 0 0 no-repeat;

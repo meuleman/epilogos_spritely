@@ -7,8 +7,9 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
 </p>
 
 <div style='margin:20px;display:inline-block;' id=panel_browse></div>
-  
+
 <script type='text/javascript'>
+  // http://wiki.wubrowse.org/V20_(2_of_3):_embedding_browser
   embed_washugb({
       host:'http://epigenomegateway.wustl.edu',
       container:document.getElementById('panel_browse'),
@@ -19,6 +20,7 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
       coordinate:'chr7:77100000-77600000',
       foregroundColor:'#ffffff',
       backgroundColor:'#000000',
+      panelWidth:Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"])-200,
       showContent:[
       {
         type:'quantitativeCategorySeries',
