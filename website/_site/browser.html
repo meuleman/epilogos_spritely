@@ -45,10 +45,10 @@
   
       <div id="nav" class="screen">
         <ul>
-          <li id="nav-home" class="active"><span><a href="#"></a></span></li>
-          <li id="nav-examples"><span><a href="#"></a></span></li>
-          <li id="nav-movies"><span><a href="#"></a></span></li>
-          <li id="nav-browser"><span><a href="#"></a></span></li>
+          <li id="nav-home"><span><a href="index.html"></a></span></li>
+          <li id="nav-examples"><span><a href="examples.html"></a></span></li>
+          <li id="nav-movies"><span><a href="movies.html"></a></span></li>
+          <li id="nav-browser"><span><a href="browser.html"></a></span></li>
           <!--<li id="nav-method"><span><a href="#"></a></span></li>-->
           <!--<li id="nav-applications"><span><a href="#"></a></span></li>-->
         </ul>
@@ -58,6 +58,9 @@
   
         <div class=content id=contentdiv>
 
+
+<script>$('#nav-browser').addClass('active');</script>
+
 <p>
 <b><i>epilogos</i></b> for the Roadmap Epigenomics Project are browsable in the 
 <a href="http://epigenomegateway.wustl.edu/browser/?genome=hg19&amp;chrom=chr19&amp;datahub=http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.json&amp;coordinate=chr7:77100000-77600000" target="_blank">Epigenome Browser</a>
@@ -66,8 +69,9 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
 </p>
 
 <div style='margin:20px;display:inline-block;' id=panel_browse></div>
-  
+
 <script type='text/javascript'>
+  // http://wiki.wubrowse.org/V20_(2_of_3):_embedding_browser
   embed_washugb({
       host:'http://epigenomegateway.wustl.edu',
       container:document.getElementById('panel_browse'),
@@ -78,6 +82,7 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
       coordinate:'chr7:77100000-77600000',
       foregroundColor:'#ffffff',
       backgroundColor:'#000000',
+      panelWidth:Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"])-200,
       showContent:[
       {
         type:'quantitativeCategorySeries',

@@ -151,57 +151,11 @@
 
     }, // end contactForm
 
-    menu: {
-      init: function() {
-        //$('#contentdiv').load('home.html');
-
-        $('#nav-home').click(function() { 
-          $('#contentdiv').load('home.html');
-          $('#nav-home').addClass('active');
-          $('#nav-examples').removeClass('active');
-          $('#nav-movies').removeClass('active');
-          $('#nav-browser').removeClass('active');
-          $('#nav-method').removeClass('active');
-          $('#nav-applications').removeClass('active');
-        });
-        $('#nav-examples').click(function() { 
-          $('#contentdiv').load('examples.html');
-          $('#nav-home').removeClass('active');
-          $('#nav-examples').addClass('active');
-          $('#nav-movies').removeClass('active');
-          $('#nav-browser').removeClass('active');
-          $('#nav-method').removeClass('active');
-          $('#nav-applications').removeClass('active');
-        });
-        $('#nav-movies').click(function() { 
-          $('#contentdiv').load('movies.html');
-          $('#nav-home').removeClass('active');
-          $('#nav-examples').removeClass('active');
-          $('#nav-movies').addClass('active');
-          $('#nav-browser').removeClass('active');
-          $('#nav-method').removeClass('active');
-          $('#nav-applications').removeClass('active');
-        });
-        $('#nav-browser').click(function() { 
-          $('#contentdiv').load('browser.html');
-          $('#nav-home').removeClass('active');
-          $('#nav-examples').removeClass('active');
-          $('#nav-movies').removeClass('active');
-          $('#nav-browser').addClass('active');
-          $('#nav-method').removeClass('active');
-          $('#nav-applications').removeClass('active');
-        });
-
-      },
-
-    },
-
   }; // end window.app()
 
 
   $(document).ready(function() {
     window.app.init();
-    window.app.menu.init();
     window.app.spritely.init();
     window.app.contactForm.init();
   });
