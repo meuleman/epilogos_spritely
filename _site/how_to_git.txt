@@ -1,7 +1,0 @@
-git add *
-git commit -a -m "Mirrored spritely.net"
-git push
-
-
-
-
