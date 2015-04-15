@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /custom/
+Disallow: /admin/
+Disallow: /get/
+Disallow: /go/
+Disallow: /images/
+Disallow: /scripts/
+Disallow: /styles/

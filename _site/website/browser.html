@@ -1,0 +1,68 @@
+  
+<p>
+<b><i>epilogos</i></b> for the Roadmap Epigenomics Project are browsable in the 
+<a href="http://epigenomegateway.wustl.edu/browser/?genome=hg19&amp;chrom=chr19&amp;datahub=http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.json&amp;coordinate=chr7:77100000-77600000" target="_blank">Epigenome Browser</a>
+developed at<br> Washington University in St. Louis.
+Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
+</p>
+
+<div style='margin:20px;display:inline-block;' id=panel_browse></div>
+
+<script type='text/javascript'>
+  // http://wiki.wubrowse.org/V20_(2_of_3):_embedding_browser
+  var windowsize = $(window).width()-200;
+
+  embed_washugb({
+      host:'http://epigenomegateway.wustl.edu',
+      container:document.getElementById('panel_browse'),
+      genome:'hg19',
+      noDefaultTrack:true,
+      noDeleteButton:true,
+      showFacet4customMetadata:true,
+      coordinate:'chr7:77100000-77600000',
+      foregroundColor:'#ffffff',
+      backgroundColor:'#000000',
+      panelWidth:windowsize,
+      showContent:[
+      {
+        type:'quantitativeCategorySeries',
+        name:'epilogos surprisal',
+        height:150,
+        url:'http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.gz',
+        backgroundcolor:'#000000',
+        mode:'show',
+        categories:{
+          '1':['Active TSS','#ff0000'],
+          '2':['Flanking Active TSS','#ff4500'],
+          '3':['Transcr at gene 5\' and 3\'','#32cd32'],
+          '4':['Strong transcription','#008000'],
+          '5':['Weak transcription','#006400'],
+          '6':['Genic enhancers','#c2e105'],
+          '7':['Enhancers','#ffff00'],
+          '8':['ZNF genes & repeats','#66cdaa'],
+          '9':['Heterochromatin','#8a91d0'],
+          '10':['Bivalent/Poised TSS','#cd5c5c'],
+          '11':['Flanking Bivalent TSS/Enh','#e9967a'],
+          '12':['Bivalent Enhancer','#bdb76b'],
+          '13':['Repressed PolyComb','#808080'],
+          '14':['Weak Repressed PolyComb','#c0c0c0'],
+          '15':['Quiescent/Low','#ffffff']
+        },
+      },
+      {
+        type:'native_track', 
+        list:[
+          {
+            name:'refGene',
+            mode:'full',
+            color:'#FFFFFF'
+          }
+        ]
+      },
+      ],
+  });
+</script>
+    
+  
+  
+ 

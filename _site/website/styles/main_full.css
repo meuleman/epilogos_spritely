@@ -7,16 +7,16 @@ body {
 	background: #000;
 	width: auto;
 	height: 100%;
-    font-family: Optima, Calibri, Candara, Segoe, "Segoe UI", Arial, sans-serif;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 	/* font-family: 'Trebuchet MS', Arial, Sans-Serif; */
-	font-size: 20px;
-	color: #EEEEEE;
+	font-size: 15px;
+	color: #FFF;
 	line-height: 1.6em;
     min-width: 940px;
 }
 a, a:visited {
 	/* color: #3a9bc7; */
-	color: #FFFFFF;
+	color: #FFF;
 	text-decoration: none;
     font-weight: bold;
 }
@@ -25,8 +25,44 @@ a:hover {
 }
 
 p {
-/*  background-color: #333333; */
-/*  padding:40px; */
+  background-color: #333333;
+  padding:50px;
+}
+
+h1, h2, h3, h4, h5 {
+	text-transform: uppercase;
+	font-family: Bliss, 'Myriad Pro', 'Trebuchet MS', Arial, Sans-Serif;
+	color: #a1c117;
+}
+h1 a, h2 a, h3 a, h4 a,
+h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited {
+	text-decoration: none;
+	color: #a1c117;
+}
+h1 {
+	font-size: 1.93em;
+	line-height: 1.2em;
+	margin: 8px 0 38px 0;
+}
+h2 {
+	font-size: 1.47em;
+	line-height: 1.2em;
+	margin: 8px 0 15px 0;
+}
+h3 {
+	font-size: 1.20em;
+	line-height: 1.2em;
+	margin: 8px 0 15px 0;
+}
+h4 {
+	font-size: 1.07em;
+	line-height: 1.1em;
+	margin: 8px 0 15px 0;
+}
+h5 {
+	font-size: 1.07em;
+	line-height: 1.1em;
+	margin: 8px 0 15px 0;
 }
 
 a img {
@@ -46,20 +82,29 @@ pre {
 #container {
 	width: 100%;
 	/*min-width: 900px;*/
-	padding-top: 340px;  /* WOUTER */
+	padding-top: 430px;  /* WOUTER */
 	position: relative;
 }
 
-#epilogos_logo {
-	background: url(../images/epilogos_logo.png) 0 0 no-repeat;
-	width: 200px;
-	height: 60px;
+#logo {
+	background: url(../images/spritely_logo.png) 0 0 no-repeat;
+	width: 378px;
+	height: 121px;
 	position: absolute;
-	top: 30px;
-	left: 90px;
+	top: 7px;
+	left: 30px;
 	z-index: 1900;
-	text-indent: -9999px;
+		text-indent: -9999px;
 }
+
+	#logo a {
+		/*
+			display: block;
+			width: 378px;
+			height: 121px;
+		*/
+	}
+
 
 #playpause {
 	background: url(../images/playpause_medium.png) 0 0 no-repeat;
@@ -79,7 +124,7 @@ pre {
 	left: 0;
 	width: 100%;
 	/*min-width: 900px;*/
-	height: 340px;
+	height: 430px;
 	overflow: hidden;
 }
 #stage {
@@ -87,13 +132,30 @@ pre {
 	left: 0px;
 	z-index: 100;
 }
-#epilogos {
+#bg {
+	background: #aedfe5 url(../images/sky1.png) 0 0 repeat-x;
+}
+#clouds {
+	background: transparent url(../images/cloud.png) 305px 102px repeat-x;
+}
+#hill2 {
+	background: transparent url(../images/hill2.png) 0 258px repeat-x;
+}
+#hill1 {
 	/* background: transparent url(../images/hill-with-windmill.png) 0 104px repeat-x; */
-	background: transparent url(../images/plot_KL_00000000002_WM.png) 0 0px repeat-x;
+	background: transparent url(../images/KL.png) 0 0px repeat-x;
+}
+#sprite_up {
+	position: absolute;
+	top: 40px;
+	left: 540px;
+	width: 381px;
+	height: 54px;
+	background: transparent url(../images/sprite-up-the-web-strap.png) top left no-repeat;
 }
 #dragMe {
 	position: absolute;
-	top: 275px;
+	top: 360px;
 	left: 57%;
 	z-index: 150;
 	background: url(../images/dragme_text.png) 0 0 no-repeat;
@@ -101,7 +163,6 @@ pre {
 	width: 100px;
 	height: 65px;
 }
-
 #slider {
     display: none;/* show dynamically for non smart-phones or ipad */
 	position: relative;
@@ -170,38 +231,42 @@ pre {
 	outline: none;
 }
 #nav #nav-home a {
-	width: 75px;
-	background-position: 15px 12px;
+	width: 54px;
 }
-#nav #nav-examples a {
-	width: 110px;
-	background-position: -75px 12px;
+#nav #nav-documentation a {
+	width: 164px;
+	background-position: -72px 15px;
 }
-#nav #nav-movies a {
-	width: 90px;
-	background-position: -200px 12px;
+#nav #nav-download a {
+	width: 112px;
+	background-position: -269px 15px;
 }
-#nav #nav-browser a {
-	width: 100px;
-	background-position: -300px 12px;
+#nav #nav-gallery a {
+	width: 78px;
+	background-position: -413px 15px;
 }
-/*
-#nav #nav-method a {
-	width: 100px;
-	background-position: -412px 12px;
+#nav #nav-tools a {
+	width: 60px;
+	background-position: -521px 15px;
 }
-#nav #nav-applications a {
-	width: 145px;
-	background-position: -525px 12px;
+#nav #nav-contact a {
+	width: 88px;
+	background-position: -615px 15px;
 }
-*/
-#nav #nav-credits a {
-	width: 90px;
-	background-position: -680px 12px;
+
+#noFlash {
+	background: url(../images/noflash_noproblem.png) 0 0 no-repeat;
+	width: 165px;
+	height: 166px;
+	position: absolute;
+	top: 236px;
+	right: 50px;
+	z-index: 1900;
+	text-indent: -9999px;
 }
 
 #mainContent {
-	padding: 20px 30px 30px 30px;
+	padding: 40px 30px 30px 30px;
 	min-height: 590px;
 	height: auto !important;
 	height: 590px;
@@ -213,27 +278,78 @@ pre {
 	margin: 0;
 }
 .content {
-/*	margin-right: 250px; */
+	margin-right: 250px;
 /*    display:inline-block; */
 }
-/*
 #sidebar {
 	position: absolute;
 	top: 520px;
 	width: 200px;
 	right: 30px;
 }
-*/
+
 .clickable {
 	color: #999;
 	font-style: italic;
 	padding: 0 1px;
 	border-bottom: 1px dotted #999;
 }
+#bird {
+	background: transparent url(../images/bird-forward-back.png) 0 0 no-repeat;
+	position: absolute;
+	top: 150px;
+	left: 65px;
+	width: 180px;
+	height: 123px;
+	z-index: 2000;
+	cursor: pointer;
+}
+#bird2 {
+	background: transparent url(../images/bird-forward-back-sm.png) 0 0 no-repeat;
+	position: absolute;
+	top: 70px;
+	left: 155px;
+	width: 140px;
+	height: 96px;
+	z-index: 1800;
+	cursor: pointer;
+}
 
 .trsp {
 	float: left;
 	background: transparent url(../images/trsp.jpg);
+}
+
+div#copyright {
+	width: auto;
+	/*background: #eee;
+	*/
+	padding: 30px;
+}
+div#copyright, a.copyright, a.copyright:visited {
+	color: #888888;
+}
+
+#artlogic {
+	margin-left: 50px;
+}
+#artlogic, #artlogic a, #artlogic a span {
+	float: right;
+	display: inline;
+	width: 200px;
+	height: 80px;
+}
+#artlogic a {
+	background: url(../images/artlogic_off.png) 0 0 no-repeat;
+}
+#artlogic a span {
+	display: block;
+	background: url(../images/artlogic_on.png) 0 0 no-repeat;
+	visibility: hidden;
+	text-indent: -9999px;
+}
+#artlogic a:hover span {
+	visibility: visible;
 }
 
 
@@ -415,16 +531,24 @@ body.platform-iphone {
 .platform-iphone #logo {
 	top: 10px;
 	left: 0;
-	background: url(../images/epilogos_logo.png) 0 0 no-repeat;
+	background: url(../images/spritely_logo_iphone.png) 0 0 no-repeat;
 }
 
-/*
+.platform-iphone #sprite_up {
+	top: 300px;
+	left: 0;
+	background: url(../images/sprite_up_iphone.png) 0 0 no-repeat;
+}
+
+.platform-iphone #noFlash {
+	display: none;
+} 
+
 .platform-iphone #sidebar {
 	position: static;
 	padding: 0;
 	margin: 0;
 }
-*/
 
 .platform-iphone div#nav {
 	height: auto;
@@ -491,6 +615,11 @@ body.platform-iphone {
 	height: 15px;
 }
 
+.platform-iphone #artlogic {
+	display: block;
+	float: none;
+	margin: 0 0 20px;
+}
 .platform-iphone #copyright {
 	margin: 0px;
 	padding: 10px;
