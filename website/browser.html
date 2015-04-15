@@ -2,8 +2,6 @@
 layout: default
 ---
 
-<script>$('#nav-browser').addClass('active');</script>
-
 <p>
 <b><i>epilogos</i></b> for the Roadmap Epigenomics Project are browsable in the 
 <a href="http://epigenomegateway.wustl.edu/browser/?genome=hg19&amp;chrom=chr19&amp;datahub=http://wangftp.wustl.edu/~wmeuleman/epilogos/WashU_qcat/relent/observed/qcat.json&amp;coordinate=chr7:77100000-77600000" target="_blank">Epigenome Browser</a>
@@ -15,6 +13,8 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
 
 <script type='text/javascript'>
   // http://wiki.wubrowse.org/V20_(2_of_3):_embedding_browser
+  var windowsize = $(window).width()-200;
+
   embed_washugb({
       host:'http://epigenomegateway.wustl.edu',
       container:document.getElementById('panel_browse'),
@@ -25,7 +25,8 @@ Many thanks to Xin Zhou and Daofeng Li from Ting Wang's lab for that.
       coordinate:'chr7:77100000-77600000',
       foregroundColor:'#ffffff',
       backgroundColor:'#000000',
-      panelWidth:Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"])-200,
+      panelWidth:windowsize,
+//      panelWidth:Math.max(document.documentElement["clientWidth"], document.body["scrollWidth"], document.documentElement["scrollWidth"], document.body["offsetWidth"], document.documentElement["offsetWidth"])-200,
       showContent:[
       {
         type:'quantitativeCategorySeries',
