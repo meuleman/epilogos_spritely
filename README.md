@@ -1,8 +1,10 @@
 # epilogos_spritely
 
 Website for the <b><i>epilogos</i></b> system for the visualization and analysis of large numbers of chromatin state models.
+Deployed at ![epilogos](http://compbio.mit.edu/epilogos).
 
 The idea behind <b><i>epilogos</i></b> has been conceived and developed by <b>Wouter Meuleman</b>.
+
 Many people have generously offered their support at various stages, including:
 <ul>
 <li><b>Manolis Kellis</b> (supervision and resources)</li>
