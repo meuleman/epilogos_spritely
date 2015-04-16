@@ -38,7 +38,7 @@
 	var update_fq= 200; //ms
 	
 	//read json
-	$.getJSON("/images/plot_KL_00000000002.json").done(onSuccess).fail(onError); 
+	$.getJSON("images/plot_KL_00000000002.json").done(onSuccess).fail(onError); 
 	
 	function onSuccess(json){
    		 console.log('OK'+json[0]);
