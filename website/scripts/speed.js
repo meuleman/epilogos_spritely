@@ -1,4 +1,4 @@
-var bin_size = 500; 
+var bin_size = 250; 
 var json_data = ''; 
 var update_fq = 2000; //ms
   
@@ -27,6 +27,7 @@ function changeSpeed() {
   //console.log('cursor: ' + cursor_position + ", bin: " + fps_bin + ", fps: ", json_data[fps_bin]);
          
   //set the fps
+  //$('#epilogos').spSpeed(json_data[fps_bin]/10)
   $('#epilogos').fps(json_data[fps_bin])
 }
        
