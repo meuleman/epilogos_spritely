@@ -1,6 +1,6 @@
-var bin_size = 30; 
+var bin_size = 500; 
 var json_data = ''; 
-var update_fq = 200; //ms
+var update_fq = 2000; //ms
   
 //read json
 $.getJSON("images/plot_KL_00000000002.json").done(onSuccess).fail(onError); 
@@ -18,20 +18,19 @@ function onError(error){
 function changeSpeed() { 
   // get the current positon
   cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
+  cursor_position + ($('#epilogos').width)/2
         
   //find the right bin in the json
-  speed_bin = (cursor_position - (cursor_position % bin_size));
+  fps_bin = (cursor_position - (cursor_position % bin_size));
         
   //debug messages in the console
-  //console.log('current_position: ' + cursor_position);
-  //console.log('bin in the json: ' + speed_bin);
-  //console.log('speed to set: ' + json_data[speed_bin]);
+  //console.log('cursor: ' + cursor_position + ", bin: " + fps_bin + ", fps: ", json_data[fps_bin]);
          
-  //set the speed
-  $('#epilogos').fps(json_data[speed_bin])
+  //set the fps
+  $('#epilogos').fps(json_data[fps_bin])
 }
        
-//main loop that change the speed  
+//main loop that change the fps  
 setInterval(changeSpeed, update_fq);
   
 
