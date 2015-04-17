@@ -108,7 +108,7 @@ pre {
 #dragMe {
 	position: absolute;
 	top: 320px;
-	left: 50%;
+	left: 51%;
 	z-index: 150;
 	background: url(../images/dragMe.png) 0 0 no-repeat;
 	margin-left: -50px;

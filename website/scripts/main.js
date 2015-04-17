@@ -9,9 +9,10 @@ var options = {
 };
 var dynspeed=false;
      
-var bin_size = 250; 
+var bin_size = 100; 
 var json_data = ''; 
 var update_fq = 500; //ms
+var imgwidth = 30240;
 
  (function($) {
 
@@ -26,8 +27,8 @@ var update_fq = 500; //ms
     spritely: {
       init: function() {
         if ($('#epilogos').length){
-          $('#epilogos').pan({fps: 30, speed: 3, dir: 'left', depth: 70});
-          $('#epilogos').spRelSpeed(8);
+          $('#epilogos').pan({fps: 30, speed: 10, dir: 'left', depth: 30});
+          $('#epilogos').spRelSpeed(10);
         }
 
         $('#playpause').click(function() { 
@@ -74,7 +75,7 @@ var update_fq = 500; //ms
           $slider
             .show()
             .slider({
-              value: 8,
+              value: 10,
               min: -100,
               max: 100,
               slide: function() {
@@ -97,9 +98,11 @@ var update_fq = 500; //ms
             $('#dragMe').hide();
           }
         }
+
         var sliderSpeed = val;
         if (sliderSpeed < 0) {
-          var sliderSpeed = String(sliderSpeed).split('-')[1];
+          //var sliderSpeed = String(sliderSpeed).split('-')[1];
+          var sliderSpeed = Math.abs(sliderSpeed);
           $('#epilogos').spChangeDir('right');
         } else {
           $('#epilogos').spChangeDir('left');
@@ -176,6 +179,8 @@ var update_fq = 500; //ms
         google.setOnLoadCallback(window.app.gauge.drawChart);
      
         $('#gauge').click(function() { 
+          dynspeed=!dynspeed; // toggle dynamic speed change
+
           if ($('#clickMe').css('display') == 'block') {
             if (!$.browser.msie) {
               $('#clickMe').fadeOut('slow');
@@ -183,7 +188,6 @@ var update_fq = 500; //ms
               $('#clickMe').hide();
             }
           }
-          dynspeed=!dynspeed;
         });
 
         setInterval(window.app.gauge.checkSpeed, update_fq);
@@ -193,8 +197,9 @@ var update_fq = 500; //ms
         if (dynspeed) {
           window.app.gauge.changeSpeed()
         } else {
-          $('#epilogos').spSpeed($('#slider').slider('value'));
-          data.setValue(0, 1, Math.abs($('#slider').slider('value')));
+          var sliderSpeed = Math.abs($('#slider').slider('value'));
+          $('#epilogos').spRelSpeed(sliderSpeed);
+          data.setValue(0, 1, sliderSpeed);
           chart.draw(data, options);
         }
       },
@@ -211,19 +216,20 @@ var update_fq = 500; //ms
       changeSpeed: function() { 
         // get the current positon
         cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
-        cursor_position + ($('#epilogos').width)/2
+        if (cursor_position < 0) cursor_position = imgwidth + cursor_position;
+        var direc=1; if ($('#slider').slider('value') < 0) direc=-1;
+        cursor_position = (cursor_position + (direc * ($('#epilogos').width())/2)) % imgwidth;
               
         //find the right bin in the json
-        fps_bin = (cursor_position - (cursor_position % bin_size));
+        speed_bin = (cursor_position - (cursor_position % bin_size));
               
         //debug messages in the console
-        //console.log('cursor: ' + cursor_position + ", bin: " + fps_bin + ", fps: ", json_data[fps_bin]);
-               
-        //set the fps
-        $('#epilogos').spSpeed(json_data[fps_bin]/10)
-        //$('#epilogos').fps(json_data[fps_bin])
+        console.log('cursor: ' + cursor_position + ", bin: " + speed_bin + ", speed: ", json_data[speed_bin]);
 
-        data.setValue(0, 1, json_data[fps_bin]/10);
+        //set the speed
+        $('#epilogos').spRelSpeed(json_data[speed_bin])
+
+        data.setValue(0, 1, json_data[speed_bin]);
         chart.draw(data, options);
       },
              
