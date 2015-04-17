@@ -1,4 +1,19 @@
-(function($) {
+var data;
+var chart;
+var options = {
+  width: 48, height: 48,
+  redFrom: 90, redTo: 100,
+  yellowFrom:75, yellowTo: 90,
+  greenFrom:0, greenTo: 20,
+  minorTicks: 5
+};
+var dynspeed=false;
+     
+var bin_size = 250; 
+var json_data = ''; 
+var update_fq = 500; //ms
+
+ (function($) {
 
   window.app = {
 
@@ -60,8 +75,8 @@
             .show()
             .slider({
               value: 8,
-              min: -60,
-              max: 60,
+              min: -100,
+              max: 100,
               slide: function() {
                 window.app.spritely.sliderChange($slider.slider('value'));
               },
@@ -73,6 +88,8 @@
       },
 
       sliderChange: function(val) {
+        dynspeed=false;
+
         if ($('#dragMe').css('display') == 'block') {
           if (!$.browser.msie) {
             $('#dragMe').fadeOut('slow');
@@ -91,65 +108,6 @@
       },
 
     }, // end spritely
-
-    contactForm: {
-
-      init: function() {
-        if ($('#contactForm').size() != 0) {
-          $('#contactFormContainer').click(function () {
-            return false;
-          });
-          $('#errorContainer').hide();
-          $('.jsSubmit').show();
-          $('.nojsSubmit').hide();
-
-          $('#contactFormSubmit a').click(function () {
-            if (window.app.contactForm.checkForm()) {
-              $('#contactForm').submit();
-            }
-            return false;
-          });
-
-          if ($('#contactForm.errorOccurred').size() != 0) {
-            window.app.contactForm.error('Please fill in the entire form.');
-          } else if ($('#contactForm.captchaError').size() != 0) {
-            window.app.contactForm.error('The verification text did not match the image.');
-          }
-        }
-      },
-
-      checkForm: function() {
-        if ($('#f_name').val()=='') {
-          window.app.contactForm.error('Please enter your name.');
-          return false
-        } else if ($('#f_email').val()=='') {
-          window.app.contactForm.error('Please enter your email address.');
-          return false
-        } else if ($('#f_message').val()=='') {
-          window.app.contactForm.error('Please enter a message.');
-          return false
-        }
-
-        return true;
-
-      },
-
-      error: function(which) {
-        var el = $("#errorContainer");
-
-        if (el.css('display') == 'block') {
-          el.fadeTo('fast', 0.1);
-          el.fadeTo('fast', 1);
-          el.fadeTo('fast', 0.1);
-          el.fadeTo('fast', 1);
-          el.fadeTo('fast', 0.1);
-          el.fadeTo('fast', 1);
-        } else {
-          $("#errorContainer").html(which).slideDown('slow');
-        }
-      },
-
-    }, // end contactForm
 
     menu: {
       init: function() {
@@ -210,6 +168,79 @@
 
     },
 
+    gauge: {
+      init: function() {
+        //read json
+        $.getJSON("images/plot_KL_00000000002.json").done(window.app.gauge.onSuccess).fail(window.app.gauge.onError); 
+
+        google.setOnLoadCallback(window.app.gauge.drawChart);
+     
+        $('#gauge').click(function() { 
+          if ($('#clickMe').css('display') == 'block') {
+            if (!$.browser.msie) {
+              $('#clickMe').fadeOut('slow');
+            } else {
+              $('#clickMe').hide();
+            }
+          }
+          dynspeed=!dynspeed;
+        });
+
+        setInterval(window.app.gauge.checkSpeed, update_fq);
+      },
+ 
+      checkSpeed: function() { 
+        if (dynspeed) {
+          window.app.gauge.changeSpeed()
+        } else {
+          $('#epilogos').spSpeed($('#slider').slider('value'));
+          data.setValue(0, 1, Math.abs($('#slider').slider('value')));
+          chart.draw(data, options);
+        }
+      },
+
+      onSuccess: function(json) {
+        json_data = json;
+      },
+   
+      onError: function(error){
+        //alert("ERROR"+error.status);
+        console.log("ERROR " + error.status);
+      },
+   
+      changeSpeed: function() { 
+        // get the current positon
+        cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
+        cursor_position + ($('#epilogos').width)/2
+              
+        //find the right bin in the json
+        fps_bin = (cursor_position - (cursor_position % bin_size));
+              
+        //debug messages in the console
+        //console.log('cursor: ' + cursor_position + ", bin: " + fps_bin + ", fps: ", json_data[fps_bin]);
+               
+        //set the fps
+        $('#epilogos').spSpeed(json_data[fps_bin]/10)
+        //$('#epilogos').fps(json_data[fps_bin])
+
+        data.setValue(0, 1, json_data[fps_bin]/10);
+        chart.draw(data, options);
+      },
+             
+      drawChart: function() {
+        data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['speed', 0]
+        ]);
+      
+        chart = new google.visualization.Gauge(document.getElementById('gauge'));
+        //google.visualization.events.addListener(chart, 'click', selectHandler);
+      
+        data.setValue(0, 1, Math.abs($('#slider').slider('value')));
+        chart.draw(data, options);
+      },
+    },
+
   }; // end window.app()
 
 
@@ -217,7 +248,7 @@
     window.app.init();
     window.app.menu.init();
     window.app.spritely.init();
-    window.app.contactForm.init();
+    window.app.gauge.init();
   });
 
 })(jQuery);

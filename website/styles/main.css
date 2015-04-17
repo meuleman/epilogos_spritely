@@ -58,8 +58,8 @@ pre {
 	width: 200px;
 	height: 60px;
 	position: absolute;
-	top: 30px;
-	left: 90px;
+	top: 20px;
+	left: 20px;
 	z-index: 1900;
 	text-indent: -9999px;
 }
@@ -69,10 +69,21 @@ pre {
 	width: 50px;
 	height: 50px;
 	position: absolute;
-	top: 30px;
-	left: 30px; 
+	top: 20px;
+	right: 20px; 
 	z-index: 1900;
 	text-indent: -9999px; 
+	cursor: pointer;
+}
+
+#gauge {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 20px;
+	right: 70px; 
+	z-index: 1900;
+	/* text-indent: -9999px; */
 	cursor: pointer;
 }
 
@@ -96,10 +107,21 @@ pre {
 }
 #dragMe {
 	position: absolute;
-	top: 275px;
-	left: 57%;
+	top: 320px;
+	left: 50%;
 	z-index: 150;
-	background: url(../images/dragme_text.png) 0 0 no-repeat;
+	background: url(../images/dragMe.png) 0 0 no-repeat;
+	margin-left: -50px;
+	width: 100px;
+	height: 65px;
+}
+
+#clickMe {
+	position: absolute;
+	top: 30px;
+	right: 130px;
+	z-index: 150;
+	background: url(../images/clickMe.png) 0 0 no-repeat;
 	margin-left: -50px;
 	width: 100px;
 	height: 65px;
