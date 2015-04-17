@@ -65,9 +65,9 @@ pre {
 }
 
 #playpause {
-	background: url(../images/playpause_medium.png) 0 0 no-repeat;
-	width: 50px;
-	height: 50px;
+	background: url(../images/playpause_large.png) 0 0 no-repeat;
+	width: 70px;
+	height: 70px;
 	position: absolute;
 	top: 20px;
 	right: 20px; 
@@ -77,11 +77,11 @@ pre {
 }
 
 #gauge {
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	position: absolute;
 	top: 20px;
-	right: 70px; 
+	right: 90px; 
 	z-index: 1900;
 	/* text-indent: -9999px; */
 	cursor: pointer;
@@ -118,8 +118,8 @@ pre {
 
 #clickMe {
 	position: absolute;
-	top: 30px;
-	right: 130px;
+	top: 35px;
+	right: 170px;
 	z-index: 150;
 	background: url(../images/clickMe.png) 0 0 no-repeat;
 	margin-left: -50px;

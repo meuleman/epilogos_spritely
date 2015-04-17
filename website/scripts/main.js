@@ -1,7 +1,7 @@
 var data;
 var chart;
 var options = {
-  width: 48, height: 48,
+  width: 66, height: 66,
   redFrom: 90, redTo: 100,
   yellowFrom:75, yellowTo: 90,
   greenFrom:0, greenTo: 20,
