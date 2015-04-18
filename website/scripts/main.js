@@ -217,8 +217,7 @@ var imgwidth = 30240;
         // get the current positon
         cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
         if (cursor_position < 0) cursor_position = imgwidth + cursor_position;
-        var direc=1; if ($('#slider').slider('value') < 0) direc=-1;
-        cursor_position = (cursor_position + (direc * ($('#epilogos').width())/2)) % imgwidth;
+        cursor_position = (cursor_position + ($('#epilogos').width())/2) % imgwidth;
               
         //find the right bin in the json
         speed_bin = (cursor_position - (cursor_position % bin_size));
