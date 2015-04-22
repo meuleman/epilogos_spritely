@@ -132,11 +132,12 @@ pre {
 	height: 60px;
     position: absolute;
 	top: 20px;
-	z-index: 1900;
-    font-family: Optima, Calibri, Candara, Segoe, "Segoe UI", Arial, sans-serif;
     left: 0;
     right: 0;
     margin: auto;
+	z-index: 1900;
+    font-family: Optima, Calibri, Candara, Segoe, "Segoe UI", Arial, sans-serif;
+    text-align:center;
 }
 
 #slider {
