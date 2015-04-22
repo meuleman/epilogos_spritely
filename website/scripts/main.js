@@ -226,12 +226,26 @@ var state_info = JSON.parse(json_state_info);
 
       checkSpeed: function() { 
         // get the current positon
-        cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
-        if (cursor_position < 0) cursor_position = imgwidth + cursor_position;
-        cursor_position = (cursor_position + ($('#epilogos').width())/2) % imgwidth;
+        cursor_pos_raw = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
+        cursor_position = imgwidth + cursor_pos_raw;
+
+        if ($('#slider').slider('value') > 0) {
+          cursor_position = cursor_position + (bin_size/2);
+        } else {
+          cursor_position = cursor_position - (bin_size/2);
+        }
+
+        //cursor_position = (cursor_position + ($('#epilogos').width())/2) % (imgwidth - (imgwidth % bin_size));
+        cursor_position = (cursor_position + (($('#epilogos').width())/2)) % imgwidth;
               
         //find the right bin in the json
         speed_bin = (cursor_position - (cursor_position % bin_size));
+
+        //debug messages in the console
+        console.log('raw cursor: ' + cursor_pos_raw + 
+                    ', cursor: ' + cursor_position + ', bin: ' + speed_bin + 
+                    ', speed: ', json_data[speed_bin]["speed"] + 
+                    ', state: ', json_data[speed_bin]["state"]);
 
         window.app.gauge.showStateLabel();
 
@@ -246,11 +260,6 @@ var state_info = JSON.parse(json_state_info);
       },
   
       changeSpeed: function() { 
-        //debug messages in the console
-        //console.log('cursor: ' + cursor_position + ", bin: " + speed_bin + 
-        //            ", speed: ", json_data[speed_bin]["speed"] + 
-        //            ", state: ", json_data[speed_bin]["state"]);
-
         //set the speed
         $('#epilogos').spRelSpeed(json_data[speed_bin]["speed"])
 
