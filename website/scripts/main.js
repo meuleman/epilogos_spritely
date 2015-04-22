@@ -8,13 +8,35 @@ var options = {
   minorTicks: 5
 };
 var dynspeed=false;
-     
+    
 var bin_size = 100; 
 var json_data = ''; 
 var update_fq = 500; //ms
 var imgwidth = 30240;
+var speed_bin;
+var cursor_position;
 
- (function($) {
+var json_state_info = '{' +
+  '"0":{"nam":"","col":"#000000"},' +
+  '"1":{"nam":"Active TSS","col":"#ff0000"},' +
+  '"2":{"nam":"Flanking Active TSS","col":"#ff4500"},' +
+  '"3":{"nam":"Transcr at gene 5\' and 3\'","col":"#32cd32"},' +
+  '"4":{"nam":"Strong transcription","col":"#008000"},' +
+  '"5":{"nam":"Weak transcription","col":"#006400"},' +
+  '"6":{"nam":"Genic enhancers","col":"#c2e105"},' +
+  '"7":{"nam":"Enhancers","col":"#ffff00"},' +
+  '"8":{"nam":"ZNF genes & repeats","col":"#66cdaa"},' +
+  '"9":{"nam":"Heterochromatin","col":"#8a91d0"},' +
+  '"10":{"nam":"Bivalent/Poised TSS","col":"#cd5c5c"},' +
+  '"11":{"nam":"Flanking Bivalent TSS/Enh","col":"#e9967a"},' +
+  '"12":{"nam":"Bivalent Enhancer","col":"#bdb76b"},' +
+  '"13":{"nam":"Repressed PolyComb","col":"#808080"},' +
+  '"14":{"nam":"Weak Repressed PolyComb","col":"#c0c0c0"},' +
+  '"15":{"nam":"Quiescent/Low","col":"#ffffff"}' +
+'}';
+var state_info = JSON.parse(json_state_info);
+
+(function($) {
 
   window.app = {
 
@@ -35,9 +57,9 @@ var imgwidth = 30240;
           $('#epilogos').spToggle();
         });
 
-        $('#epilogos_logo').click(function() { 
-          $('#epilogos').spToggle();
-        });
+        //$('#epilogos_logo').click(function() { 
+        //  $('#epilogos').spToggle();
+        //});
 
         //$('html').flyToTap();
         if (!window.app.is_ipad && document.location.hash.indexOf('iphone') > -1 ) {
@@ -193,7 +215,26 @@ var imgwidth = 30240;
         setInterval(window.app.gauge.checkSpeed, update_fq);
       },
  
+      onSuccess: function(json) {
+        json_data = json;
+      },
+   
+      onError: function(error){
+        //alert("ERROR"+error.status);
+        console.log("ERROR " + error.status);
+      },
+
       checkSpeed: function() { 
+        // get the current positon
+        cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
+        if (cursor_position < 0) cursor_position = imgwidth + cursor_position;
+        cursor_position = (cursor_position + ($('#epilogos').width())/2) % imgwidth;
+              
+        //find the right bin in the json
+        speed_bin = (cursor_position - (cursor_position % bin_size));
+
+        window.app.gauge.showStateLabel();
+
         if (dynspeed) {
           window.app.gauge.changeSpeed()
         } else {
@@ -203,33 +244,25 @@ var imgwidth = 30240;
           chart.draw(data, options);
         }
       },
-
-      onSuccess: function(json) {
-        json_data = json;
-      },
-   
-      onError: function(error){
-        //alert("ERROR"+error.status);
-        console.log("ERROR " + error.status);
-      },
-   
+  
       changeSpeed: function() { 
-        // get the current positon
-        cursor_position = -parseFloat($._spritely.getBgX($('#epilogos')).replace('px','')); 
-        if (cursor_position < 0) cursor_position = imgwidth + cursor_position;
-        cursor_position = (cursor_position + ($('#epilogos').width())/2) % imgwidth;
-              
-        //find the right bin in the json
-        speed_bin = (cursor_position - (cursor_position % bin_size));
-              
         //debug messages in the console
-        console.log('cursor: ' + cursor_position + ", bin: " + speed_bin + ", speed: ", json_data[speed_bin]);
+        //console.log('cursor: ' + cursor_position + ", bin: " + speed_bin + 
+        //            ", speed: ", json_data[speed_bin]["speed"] + 
+        //            ", state: ", json_data[speed_bin]["state"]);
 
         //set the speed
-        $('#epilogos').spRelSpeed(json_data[speed_bin])
+        $('#epilogos').spRelSpeed(json_data[speed_bin]["speed"])
 
-        data.setValue(0, 1, json_data[speed_bin]);
+        data.setValue(0, 1, json_data[speed_bin]["speed"]);
         chart.draw(data, options);
+      },
+             
+      showStateLabel: function() { 
+        //set the speed
+        var state = json_data[speed_bin]["state"];
+        $('#epilogos_label span').text(state_info[json_data[speed_bin]["state"]]["nam"]);
+        $('#epilogos_label span').css({'color':state_info[json_data[speed_bin]["state"]]["col"]});
       },
              
       drawChart: function() {

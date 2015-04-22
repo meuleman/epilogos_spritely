@@ -127,6 +127,18 @@ pre {
 	height: 65px;
 }
 
+#epilogos_label {
+	width: 300px;
+	height: 60px;
+    position: absolute;
+	top: 20px;
+	z-index: 1900;
+    font-family: Optima, Calibri, Candara, Segoe, "Segoe UI", Arial, sans-serif;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 #slider {
     display: none;/* show dynamically for non smart-phones or ipad */
 	position: relative;
